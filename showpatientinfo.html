@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+{% block title %} Show  patient Page {% endblock %}
+table, th, td {
+  border: 1px solid black;
+
+}
+table {
+border-collapse: collapse;
+}
+{% block maindiv %}
+ <h1>Welcome..This is Show patient InformationPage...</h1>
+     <style>
+        table, th, td {
+                  border: 1px solid black;
+                  padding:8px;
+                     }
+        table {
+                  border-collapse: collapse;
+               }
+
+     </style>
+  <table >
+
+      <thead>
+        <tr>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Username</th>
+
+          <th scope="col">Gender</th>
+          <th scope="col">Disease</th>
+          <th scope="col">City</th>
+          <th scope="col">BirthDate</th>
+          <th scope="col">EmailAddress</th>
+          {% if user.is_patient %}
+            <th scope="col">Action</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+          <tr>
+            <td>{{patient.patient_name.first_name}}</td>
+            <td> {{patient.patient_name.last_name}}</td>
+            <td>{{patient.patient_name.username}} </td>
+
+            <td>{{patient.Gender}}</td>
+            <td>{{patient.Disease}}</td>
+            <td>{{patient.City}}</td>
+            <td>{{patient.birth_date}}</td>
+            <td>{{patient.Email}}</td>
+            {% if user.is_patient %}
+              <td>
+                {% if user.is_patient %}
+
+
+
+                  <a href="{% url 'patient:editpatientinfo' %}" class="btn btn-info"> Edit patient information</a><br>
+
+
+                 {% endif %}
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+  </table><br>
+    {% if request.user.is_patient %}
+      <a href="{% url 'patient:patient'%}" class="btn btn-info">Back</a>
+     {% else %}
+     <a href="{% url 'patient:patient' %}" class="btn btn-info">Back</a>
+    {% endif %}
+{% endblock %}

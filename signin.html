@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block maindiv %}
+{% if request.user.is_authenticated %}
+<h1>You Have already Logged in {{request.user.first_name|capfirst}}</h1>
+{% else %}
+      <div class="hm-banner">
+       <img src="https://www.softclinicsoftware.com/wp-content/uploads/2020/09/sc_landing_banner-1-min.jpg" alt="SC" width="100%">
+      </div>
+
+    <form method="post" action='#'>
+        {% csrf_token %}
+    {{form.as_p}}
+<button type="submit" class="btn btn-success">Signin</button>
+    </form>
+    <label type="submit" >Signup As</label>
+    <br>
+    <a class='btn btn-primary' href="{%  url 'patient:signup' 1 %}">Signup As patient</a><br>
+    <a class='btn btn-primary' href="{%  url 'patient:signup' 2 %}">Signup As doctor</a>
+    {% endif %}
+
+{% endblock %}

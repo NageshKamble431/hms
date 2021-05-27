@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block maindiv  %}
+<h1>Register as {{status}}</h1>
+<form method="post" action='#'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">Signup</button>
+</form><br>
+ <a href="{% url 'patient:signin' %}" class="btn btn-info">Back</a>
+{% endblock %}

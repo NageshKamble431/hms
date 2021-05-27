@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+{% block title %} Doctor Page {% endblock %}
+
+table, th, td {
+  border: 1px solid black;
+
+}
+table {
+border-collapse: collapse;
+}
+
+{% block maindiv %}
+  <h1>****Logged in Doctor Details****</h1>
+    <style>
+        table, th, td {
+                  border: 1px solid black;
+                  padding:8px;
+                     }
+        table {
+                  border-collapse: collapse;
+               }
+
+    </style>
+<table >
+
+      <thead>
+        <tr>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Username</th>
+
+          <th scope="col">Gender</th>
+          <th scope="col">Disease_specialist</th>
+          <th scope="col">City</th>
+          <th scope="col">Education</th>
+          <th scope="col">BirthDate</th>
+          <th scope="col">EmailAddress</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for info in information %}
+       <tr>
+         <td>{{info.doctor_name.first_name}}</td>
+         <td> {{info.doctor_name.last_name}}</td>
+         <td>{{info.doctor_name.username}} </td>
+
+         <td>{{info.Gender}}</td>
+         <td>{{info.Disease_specialist}}</td>
+         <td>{{info.City}}</td>
+         <td>{{info.Education}}</td>
+         <td>{{info.birth_date}}</td>
+         <td>{{info.doctor_name.email}}</td>
+         <td>
+              {% if user.is_doctor %}
+
+
+                <a href="{% url 'patient:editdoctorinfo' %}" class="btn btn-info">Edit My Information</a><br>
+
+
+               {% endif %}
+       </tr>
+     {% endfor %}
+      </tbody>
+    </table><br>
+
+  <a href="{% url 'patient:doctor'%}" class="btn btn-info">Back</a><br>
+
+
+
+{% endblock %}

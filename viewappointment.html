@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+{% block title %} Appointment Page {% endblock %}
+
+table, th, td {
+  border: 1px solid black;
+
+}
+table {
+border-collapse: collapse;
+}
+
+{% block maindiv %}
+  <h1>**** Appointment ****</h1>
+    <style>
+        table, th, td {
+                  border: 1px solid black;
+                  padding:8px;
+                     }
+        table {
+                  border-collapse: collapse;
+               }
+
+    </style>
+<table >
+
+      <thead>
+        <tr>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Username</th>
+
+
+          <th scope="col">appointment_date</th>
+          <th scope="col">Disease</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in patient %}
+          <tr>
+             <td>{{info.patient_name.first_name}}</td>
+             <td> {{info.patient_name.last_name}}</td>
+             <td>{{info.patient_name.username}} </td>
+
+
+             <td>{{info.appointment_date}}</td>
+             <td>{{info.Disease}}</td>
+
+
+          </tr>
+        {% endfor %}
+      </tbody>
+</table><br>
+
+      <a href="{% url 'patient:patient'%}" class="btn btn-info">Back</a>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+{% block title %} Patient Page {% endblock %}
+
+table, th, td {
+  border: 1px solid black;
+
+}
+table {
+border-collapse: collapse;
+}
+
+{% block maindiv %}
+  <h1>****You are already logged in ****</h1>
+    <style>
+        table, th, td {
+                  border: 1px solid black;
+                  padding:8px;
+                     }
+        table {
+                  border-collapse: collapse;
+               }
+
+    </style>
+<table >
+
+      <thead>
+        <tr>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Username</th>
+
+
+          <th scope="col">EmailAddress</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in information %}
+          <tr>
+             <td>{{info.patient_name.first_name}}</td>
+             <td> {{info.patient_name.last_name}}</td>
+             <td>{{info.patient_name.username}} </td>
+
+
+             <td>{{info.Email}}</td>
+             <td>
+              {% if user.is_patient %}
+
+                 <a href="{% url 'patient:patientappointment' %}" class="btn btn-info">book appointment</a><br>
+
+                 <a href="{% url 'patient:patientresult' %}" class="btn btn-info">view result</a><br>
+                {% else %}
+                  <a href="{% url 'patient:showpatientinfo' info.patient_name.id %}" class="btn btn-info">view detail</a><br>
+              {% endif %}
+             </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+</table><br>
+  {% if request.user.is_doctor %}
+      <a href="{% url 'patient:doctor'%}" class="btn btn-info">Back</a>
+   {% else %}
+      <a href="{% url 'patient:viewappointment'  %}" class="btn btn-info">view appointment</a><br>
+      <a href="{% url 'patient:patient'%}" class="btn btn-info">Back</a>
+  {% endif %}
+{% endblock %}

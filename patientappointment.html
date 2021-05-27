@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block title %} Show  appointment  Page {% endblock %}
+
+{% block maindiv %}
+  <h1>Welcome..This is Adding patient appointment Page...</h1>
+  <form action="{% url 'patient:viewappointment' %}" method="post">
+       {% csrf_token %}
+       {{form.as_p}}
+      <button type="submit" class='btn btn-outline-success btn-info'>Submit</button>
+  </form><br>
+
+
+  <a href="{% url 'patient:patient' %}" class="btn btn-info">Back</a><br>
+{% endblock %}

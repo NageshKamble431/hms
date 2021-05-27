@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+{% block title %} Doctor Page {% endblock %}
+
+table, th, td {
+  border: 1px solid black;
+
+}
+table {
+border-collapse: collapse;
+}
+
+{% block maindiv %}
+  <h1>****Logged in Doctor Details****</h1>
+    <style>
+        table, th, td {
+                  border: 1px solid black;
+                  padding:8px;
+                     }
+        table {
+                  border-collapse: collapse;
+               }
+
+    </style>
+<table >
+
+      <thead>
+        <tr>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Username</th>
+
+
+          <th scope="col">EmailAddress</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for info in information %}
+       <tr>
+         <td>{{info.doctor_name.first_name}}</td>
+         <td> {{info.doctor_name.last_name}}</td>
+         <td>{{info.doctor_name.username}} </td>
+
+
+         <td>{{info.doctor_name.email}}</td>
+         <td>
+              {% if user.is_doctor %}
+
+
+                <a href="{% url 'patient:patient' %}" class="btn btn-info">view patient</a><br><br>
+
+                  <a href="{% url 'patient:doctorappointment' %}" class="btn btn-info">view appointment</a><br>
+
+               {% endif %}
+       </tr>
+     {% endfor %}
+      </tbody>
+    </table> <br>
+
+  <a href="{% url 'patient:doctor'%}" class="btn btn-info">Back</a><br><br>
+
+
+  <a href="{% url 'patient:deletedoctorinfo' %}" class="btn btn-danger">Delete My Information</a><br>
+
+
+{% endblock %}

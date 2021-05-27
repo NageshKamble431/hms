@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}  appointment {% endblock %}
+{% block maindiv %}
+  <h1> This is your appointment....</h1>
+  {% csrf_token %}
+  <a href="{% url 'patient:doctor' %}" class="btn btn-info">Back</a><br>
+{% endblock %}
